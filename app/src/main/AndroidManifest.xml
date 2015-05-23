@@ -32,6 +32,10 @@
             android:name=".register_success"
             android:label="@string/title_activity_register_success" >
         </activity>
+        <activity
+            android:name=".home"
+            android:label="@string/title_activity_home" >
+        </activity>
     </application>
 
 </manifest>
