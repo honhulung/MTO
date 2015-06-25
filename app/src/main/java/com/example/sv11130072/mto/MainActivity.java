@@ -1,15 +1,20 @@
 package com.example.sv11130072.mto;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
     private EditText account, password;
+    private SQLiteDatabase database;
+    private Button btn_login,btn_registry,btn_exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,26 @@ public class MainActivity extends ActionBarActivity {
             public void onFocusChange(View view, boolean b) {
                 if (b) {
                     password.setText("");
+                }
+            }
+        });
+        creatDatabase();
+        btn_login = (Button) findViewById(R.id.login);
+        btn_registry = (Button) findViewById(R.id.registry);
+        btn_exit = (Button) findViewById(R.id.exit);
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v==btn_exit){
+                    System.exit(0);
+                }
+            }
+        });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v==btn_login){
+
                 }
             }
         });
@@ -56,4 +81,23 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+        //tao database account
+      public void creatDatabase(){
+        database = SQLiteDatabase.openDatabase("mto.db",null,SQLiteDatabase.CREATE_IF_NECESSARY);
+        String sql = "CREATE TABLE account (";
+        sql+="id_account INTEGER primary key,";
+        sql+="username TEXT,";
+        sql+="password TEXT)";
+        database.execSQL(sql);
+          String tbl_comment ="CREATE TABLE comment (";
+          tbl_comment+="id_comment INTEGER primary key,";
+          tbl_comment+="content_comment TEXT)";
+          database.execSQL(tbl_comment);
+
+
+
+
+    }
+
+
 }
