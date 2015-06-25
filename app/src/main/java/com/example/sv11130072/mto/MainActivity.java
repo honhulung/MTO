@@ -1,5 +1,6 @@
 package com.example.sv11130072.mto;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
@@ -39,6 +40,16 @@ public class MainActivity extends ActionBarActivity {
         creatDatabase();
         btn_login = (Button) findViewById(R.id.login);
         btn_registry = (Button) findViewById(R.id.registry);
+        btn_registry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v==btn_registry){
+                    Intent regis = new Intent(MainActivity.this,Register.class);
+                    startActivity(regis);
+
+                }
+            }
+        });
         btn_exit = (Button) findViewById(R.id.exit);
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
