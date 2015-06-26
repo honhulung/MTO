@@ -70,8 +70,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 if(v==btn_login){
                     Login log = new Login();
-                    if(log.checkUser(username)==true){
-                        if(log.login(username,pass)==true){
+                    if(log.checkUser(username)){
+                        if(log.login(username,pass)){
                             Intent i = new Intent(MainActivity.this,home.class);
                             startActivity(i);
 
