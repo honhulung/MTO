@@ -45,12 +45,12 @@ public class MainActivity extends ActionBarActivity {
         btn_registry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v==btn_registry){
+
                     Intent
                     my_registry = new Intent(MainActivity.this,Register.class);
                     startActivity(my_registry);
 
-                }
+
             }
         });
         btn_exit = (Button) findViewById(R.id.exit);
@@ -68,15 +68,15 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                if(v==btn_login){
+
                     Login log = new Login();
                     if(log.checkUser(username)){
                         if(log.login(username,pass)){
-                           /* Intent i = new Intent(MainActivity.this,home.class);
-                            startActivity(i);*/
+                            Intent i = new Intent(MainActivity.this,home.class);
+                            startActivity(i);
 
 
-                        }
+
 
 
                     }
