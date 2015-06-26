@@ -72,8 +72,8 @@ public class MainActivity extends ActionBarActivity {
                     Login log = new Login();
                     if(log.checkUser(username)){
                         if(log.login(username,pass)){
-                            Intent i = new Intent(MainActivity.this,home.class);
-                            startActivity(i);
+                           /* Intent i = new Intent(MainActivity.this,home.class);
+                            startActivity(i);*/
 
 
                         }
