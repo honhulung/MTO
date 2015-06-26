@@ -46,9 +46,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent
-                    my_registry = new Intent(MainActivity.this,Register.class);
-                    startActivity(my_registry);
+                    Intent  my_registry = new Intent(MainActivity.this,Register.class);
+                  startActivity(my_registry);
 
 
             }
