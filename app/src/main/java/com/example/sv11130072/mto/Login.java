@@ -7,9 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import Dao.AccountDAO;
+import until.Account;
+
 
 public class Login extends ActionBarActivity {
     private TextView lbl;
+    private AccountDAO listUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,8 @@ public class Login extends ActionBarActivity {
         Typeface custom_fontBold = Typeface.createFromAsset(getAssets(), "./Assert/Fonts/Tangerine_Bold.ttf");
         lbl.setTypeface(custom_fontBold);
         setContentView(R.layout.activity_login);
+        listUser = new AccountDAO();
+
     }
 
 
@@ -41,5 +48,21 @@ public class Login extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean checkUser(String username) {
+        return listUser.checkUser(username);
+    }
+
+    public boolean login(String username, String pass) {
+        boolean t = false;
+        if(username==null){
+            return false;
+
+        }
+        else{
+            return listUser.login(username,pass);
+        }
+
     }
 }

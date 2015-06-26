@@ -29,4 +29,15 @@ public class Account {
         if(this.pass==passWord) return true;
         else return false;
     }
+
+    public int getId_Account(){
+        return this.id_Account;
+
+    }
+    public String getUserName(){
+        return this.userName;
+    }
+    public String getPass(){
+        return this.pass;
+    }
 }

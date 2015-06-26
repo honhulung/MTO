@@ -1,15 +1,21 @@
 package com.example.sv11130072.mto;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import Dao.CreatFirstDatabase;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -20,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CreatFirstDatabase creat = new CreatFirstDatabase();
         setContentView(R.layout.activity_login);
         account = (EditText) findViewById(R.id.editAccount);
         password = (EditText) findViewById(R.id.editPass);
@@ -37,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
-        creatDatabase();
+
         btn_login = (Button) findViewById(R.id.login);
         btn_registry = (Button) findViewById(R.id.registry);
         btn_registry.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +67,37 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         btn_login.setOnClickListener(new View.OnClickListener() {
+            String username = account.getText().toString();
+            String pass = password.getText().toString();
+
             @Override
             public void onClick(View v) {
                 if(v==btn_login){
+                    Login log = new Login();
+                    if(log.checkUser(username)==true){
+                        if(log.login(username,pass)==true){
+                            Intent i = new Intent(MainActivity.this,home.class);
+
+
+                        }
+
+
+                    }
+                    else {
+                        AlertDialog.Builder notice  = new AlertDialog.Builder(MainActivity.this);
+                        notice.setTitle("Nhac nho!");
+                        notice.setMessage("Sai Thong tin dang nhap!");
+                        notice.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                account.setText("");
+                                password.setText("");
+                            }
+                        });
+                        notice.create().show();
+
+                    }
 
                 }
             }
@@ -92,23 +127,8 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-        //tao database account
-      public void creatDatabase(){
-        database = SQLiteDatabase.openDatabase("mto.db",null,SQLiteDatabase.CREATE_IF_NECESSARY);
-        String sql = "CREATE TABLE account (";
-        sql+="id_account INTEGER primary key,";
-        sql+="username TEXT,";
-        sql+="password TEXT)";
-        database.execSQL(sql);
-          String tbl_comment ="CREATE TABLE comment (";
-          tbl_comment+="id_comment INTEGER primary key,";
-          tbl_comment+="content_comment TEXT)";
-          database.execSQL(tbl_comment);
 
 
-
-
-    }
 
 
 }
