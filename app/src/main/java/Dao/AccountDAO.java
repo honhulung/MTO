@@ -2,7 +2,7 @@ package Dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class AccountDAO {
     private List<Account> list;
     public AccountDAO(){
         list = new ArrayList<Account>();
-        SQLiteDatabase database =  SQLiteDatabase.openDatabase("mto.db",null,SQLiteDatabase.OPEN_READONLY);
+        SQLiteDatabase database =  SQLiteDatabase.openDatabase("mto.db",null,SQLiteDatabase.CREATE_IF_NECESSARY);
 
         Cursor cursor = database.rawQuery("select*from account",null);
         while(cursor.moveToNext()){

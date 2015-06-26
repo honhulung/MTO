@@ -3,24 +3,19 @@ package com.example.sv11130072.mto;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import Dao.CreatFirstDatabase;
 
 
 public class MainActivity extends ActionBarActivity {
     private EditText account, password;
-    private SQLiteDatabase database;
+
     private Button btn_login,btn_registry,btn_exit;
 
     @Override
@@ -51,8 +46,9 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(v==btn_registry){
-                    Intent regis = new Intent(MainActivity.this,Register.class);
-                    startActivity(regis);
+                    Intent
+                    my_registry = new Intent(MainActivity.this,Register.class);
+                    startActivity(my_registry);
 
                 }
             }
@@ -77,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
                     if(log.checkUser(username)==true){
                         if(log.login(username,pass)==true){
                             Intent i = new Intent(MainActivity.this,home.class);
+                            startActivity(i);
 
 
                         }
