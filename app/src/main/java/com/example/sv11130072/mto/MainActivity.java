@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CreatFirstDatabase creat = new CreatFirstDatabase();
+
         setContentView(R.layout.activity_login);
         account = (EditText) findViewById(R.id.editAccount);
         password = (EditText) findViewById(R.id.editPass);
