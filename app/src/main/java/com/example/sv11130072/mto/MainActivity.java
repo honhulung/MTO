@@ -1,7 +1,5 @@
 package com.example.sv11130072.mto;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,15 +10,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+import Dao.AccountDAO;
+import until.Account;
+
+
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     private EditText account, password;
+    private AccountDAO database = new AccountDAO(this);
 
     private Button btn_login,btn_registry,btn_exit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        database.open();
+        database.createData("", "");
+       database.close();
+
 
         setContentView(R.layout.activity_login);
         account = (EditText) findViewById(R.id.editAccount);
@@ -46,8 +55,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent
-                    my_registry = new Intent(MainActivity.this,Register.class);
+                    Intent my_registry = new Intent(MainActivity.this,Register.class);
                     startActivity(my_registry);
 
 
@@ -62,23 +70,20 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(this);
+
+        /*btn_login.setOnClickListener(new View.OnClickListener() {
             String username = account.getText().toString();
             String pass = password.getText().toString();
 
             @Override
             public void onClick(View v) {
 
-                    Login log = new Login();
-                    if(log.checkUser(username)){
-                        if(log.login(username,pass)){
+
+                    if(checkUser(username)==true){
+                        if(login(username, pass)==true){
                             Intent i = new Intent(MainActivity.this,home.class);
                             startActivity(i);
-
-
-
-
-
                     }
                     else {
                         AlertDialog.Builder notice  = new AlertDialog.Builder(MainActivity.this);
@@ -98,9 +103,11 @@ public class MainActivity extends ActionBarActivity {
 
                 }
             }
-        });
+        });*/
 
     }
+
+
 
 
     @Override
@@ -117,6 +124,8 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -127,5 +136,16 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+    @Override
+    public void onClick(View v) {
+        String username = account.getText().toString();
+        String pass = password.getText().toString();
+        if(v==btn_login){
+            if(database.checkUser(username))
+                if(database.login(username,pass)){
+                    Intent i = new Intent(MainActivity.this,Home.class);
+                    startActivity(i);}
 
+
+    }}
 }

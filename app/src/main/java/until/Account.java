@@ -7,10 +7,12 @@ public class Account {
     private int id_Account;
     private String userName;
     private String pass;
-    public Account(int id_Account,String userName,String pass){
+    private String mail;
+    public Account(int id_Account,String userName,String mail,String pass){
         this.id_Account= id_Account;
         this.pass = pass;
         this.userName = userName;
+        this.mail=mail;
 
     }
     public boolean authencation(String userName,String passWord){
@@ -39,5 +41,8 @@ public class Account {
     }
     public String getPass(){
         return this.pass;
+    }
+    public String getMail(){
+        return this.mail+"";
     }
 }
