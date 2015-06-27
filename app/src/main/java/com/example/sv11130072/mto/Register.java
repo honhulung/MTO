@@ -16,7 +16,9 @@ public class Register extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        lbl = (TextView) findViewById(R.id.textView7);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(), "./Assert/Fonts/Tangerine_Bold.ttf");
+        lbl.setTypeface(custom_font);
         setContentView(R.layout.activity_register);
     }
 
