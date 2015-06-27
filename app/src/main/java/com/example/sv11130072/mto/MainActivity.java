@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     private EditText account, password;
 
     private Button btn_login,btn_registry,btn_exit;
@@ -62,44 +62,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            String username = account.getText().toString();
-            String pass = password.getText().toString();
-
-            @Override
-            public void onClick(View v) {
-
-                    Login log = new Login();
-                    if(log.checkUser(username)){
-                        if(log.login(username,pass)){
-                            Intent i = new Intent(MainActivity.this,home.class);
-                            startActivity(i);
-
-
-
-
-
-                    }
-                    else {
-                        AlertDialog.Builder notice  = new AlertDialog.Builder(MainActivity.this);
-                        notice.setTitle("Nhac nho!");
-                        notice.setMessage("Sai Thong tin dang nhap!");
-                        notice.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                                account.setText("");
-                                password.setText("");
-                            }
-                        });
-                        notice.create().show();
-
-                    }
-
-                }
-            }
-        });
-
+       btn_login.setOnClickListener(this);
     }
 
 
@@ -126,6 +89,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
-
+    @Override
+    public void onClick(View v) {
+        if(v==btn_login){
+            Intent i = new Intent(getApplication(),Home.class);
+            startActivity(i);
+        }
+    }
 }
